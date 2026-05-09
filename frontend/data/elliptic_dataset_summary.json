@@ -1,0 +1,109 @@
+{
+  "projectName": "web3_aml_elliptic_agent",
+  "source": "Elliptic Bitcoin Transaction Graph",
+  "sourceType": "Public Kaggle research dataset",
+  "caseType": "Transaction-level review",
+  "reviewObject": "Bitcoin transaction node txId",
+  "notReviewObject": [
+    "wallet identity",
+    "customer identity",
+    "KYC profile",
+    "final AML verdict"
+  ],
+  "keyFactors": {
+    "nodeCount": 203769,
+    "directedEdgeCount": 234355,
+    "timeStepCount": 49,
+    "timeStepRange": [
+      1,
+      49
+    ],
+    "approximateWindowPerTimeStep": "Often described as approximately two weeks in public explanations; use as demo temporal window, not exact timestamp evidence.",
+    "rawFeatureCountIncludingTxIdAndTimeStep": 167,
+    "anonymousFeatureCount": 165,
+    "featureDisplayPolicy": "Raw anonymous features are not displayed directly; they are transformed into review signals and evidence fields."
+  },
+  "labelDistribution": {
+    "licit": 42019,
+    "unknown": 157205,
+    "illicit": 4545
+  },
+  "labelExplanation": {
+    "licit_for_evaluation_only": "Original Elliptic label used only to evaluate or explain the demo sample. A licit-labeled transaction can still be selected for high-priority review if rule-based graph signals are elevated; that is a review queue signal, not a final illicit decision.",
+    "illicit_for_evaluation_only": "Original Elliptic label used only for research/demo evaluation. The notebook does not use it as a final AML conclusion.",
+    "unknown": "Unlabeled transaction in the Elliptic dataset; useful for review-priority style demo cases."
+  },
+  "graphSummary": {
+    "graphType": "Directed transaction graph",
+    "directedEdgeCount": 234355,
+    "averageDirectedDegreeApprox": 2.3002,
+    "weakComponentCount": "notComputedInLiteMode",
+    "largestWeakComponentSize": "notComputedInLiteMode",
+    "singleNodeComponentCount": "notComputedInLiteMode",
+    "note": "Weak connected components are intentionally not computed in the notebook lite path to avoid collecting the full edge list into Python memory."
+  },
+  "generatedDemoCaseSummary": {
+    "maxDemoCases": 200,
+    "riskBandDistribution": {
+      "high": 100,
+      "medium": 26,
+      "low": 74
+    },
+    "demoLabelDistribution": {
+      "unknown": 123,
+      "licit_for_evaluation_only": 75,
+      "illicit_for_evaluation_only": 2
+    },
+    "samplingPolicy": "Multi-batch stratified merge; deduplicated by rawTxId."
+  },
+  "analysisOutputs": {
+    "transactionProfile": [
+      "inputCount from graph in-degree",
+      "outputCount from graph out-degree",
+      "flowPattern: fan-in / fan-out / balanced",
+      "transactionVolumeBucket from rule-based priority score"
+    ],
+    "graphContext": [
+      "oneHopNeighborCount",
+      "oneHopRiskNeighborShare",
+      "twoHopNeighborCount",
+      "twoHopRiskNeighborShare",
+      "distanceToKnownIllicitCluster within 2 hops",
+      "neighborAggregationSignal"
+    ],
+    "temporalBehavior": [
+      "timeStep",
+      "49 total time steps",
+      "approximate two-week temporal window label"
+    ],
+    "ruleAndReviewSignals": [
+      "triggeredRules",
+      "scoreBreakdown",
+      "evidenceFields",
+      "retrievedGuidance from FATF and FinCEN PDFs",
+      "human review boundary"
+    ]
+  },
+  "ragSources": [
+    {
+      "sourceId": "FATF_2020",
+      "title": "FATF Red Flag Indicators",
+      "publisher": "FATF",
+      "url": "https://www.fatf-gafi.org/..."
+    },
+    {
+      "sourceId": "FINCEN_2019",
+      "title": "FinCEN Advisory CVC",
+      "publisher": "FinCEN",
+      "url": "https://www.fincen.gov/..."
+    }
+  ],
+  "limitations": [
+    "Transaction-level graph review only; not wallet/address-level audit.",
+    "No KYC, source-of-funds, customer identity, sanctions-list matching, or wallet attribution is available in the public dataset.",
+    "BTC amount fields shown in front-end schema are null because the public Elliptic feature CSV uses anonymized features.",
+    "Distance to illicit cluster is local graph exposure within the prepared sample, not full chain tracing.",
+    "Rule-based score is a prioritization signal, not a probability of crime and not a final compliance decision.",
+    "Weak connected components are not computed in lite mode to keep the notebook runnable in Kaggle/Colab memory limits."
+  ]
+}

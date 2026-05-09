@@ -1,0 +1,10 @@
+pandas>=2.0
+pypdf>=4.0
+openai>=1.0
+networkx>=3.0
+
+# Optional: for Spark-based processing (heavier but faster on large data)
+# pyspark>=3.5
+
+# Optional: for Kaggle API download
+# kaggle

@@ -1,0 +1,41 @@
+{
+  "id": "string",
+  "source": "Elliptic Bitcoin Transaction Graph",
+  "caseType": "Transaction-level review",
+  "timeStep": "number",
+  "transactionIdMasked": "string",
+  "demoLabel": [
+    "licit_for_evaluation_only",
+    "illicit_for_evaluation_only",
+    "unknown"
+  ],
+  "riskBand": [
+    "low",
+    "medium",
+    "high"
+  ],
+  "modelScore": "rule-based priority score between 0 and 1",
+  "modelSignals": {
+    "scoreType": "rule_based_priority_score",
+    "scoreBreakdown": "rules that contributed points"
+  },
+  "transactionProfile": {
+    "inputCount": "graph in-degree",
+    "outputCount": "graph out-degree",
+    "flowPattern": [
+      "fan-in",
+      "fan-out",
+      "balanced"
+    ]
+  },
+  "graphContext": {
+    "oneHopNeighborCount": "number",
+    "twoHopRiskNeighborShare": "number if available",
+    "distanceToKnownIllicitCluster": "string if available"
+  },
+  "triggeredRules": "evidence-bound rule list",
+  "evidenceFields": "displayable evidence fields",
+  "retrievedGuidance": "short PDF guidance excerpts",
+  "reviewDraft": "structured review draft",
+  "constraints": "review boundaries"
+}
